@@ -1,7 +1,5 @@
 // 为count创造的reducer
 
-import {INCREMENT,DECREMENT} from './constant'
-
 // 设置一个初始值
 const initState = 0
 
@@ -13,9 +11,9 @@ const initState = 0
 function countReducer(preState=initState,action){
     const {type,data} = action
     switch (type) {
-        case INCREMENT:
+        case 'increment':
             return preState + data
-        case DECREMENT:
+        case 'decrement':
             return preState - data
         default:
             return preState
