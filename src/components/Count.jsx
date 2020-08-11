@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import store from '../redux/store'
-import {incrementAction,decrementAction} from '../redux/count_action'
+// import store from '../redux/store'
+import {incrementAction,decrementAction,incrementWaitAction} from '../redux/count_action'
 
 export default class Count extends Component {
     state = {
@@ -15,7 +15,7 @@ export default class Count extends Component {
         // 获取原状态
         // const {count} = this.state
         // this.setState({count:count + value*1})
-        store.dispatch(incrementAction(value*1))
+        this.props.store.dispatch(incrementAction(value*1))
         
     }
     // 减法
@@ -26,31 +26,31 @@ export default class Count extends Component {
         //  const {count} = this.state
         //  更新状态
         //  this.setState({count:count - value*1})
-        store.dispatch(decrementAction(value*1))
+        this.props.store.dispatch(decrementAction(value*1))
     }
     // 奇数加
     incrementIfOdd = () =>{
-        if (store.getState() % 2 !== 0) {
+        if (this.props.store.getState() % 2 !== 0) {
             const {value} = this.refs.selectedNumber
             // const {count} = this.state
             // this.setState({count:count + value*1})
-            store.dispatch(incrementAction(value*1))
+            this.props.store.dispatch(incrementAction(value*1))
         }
     }
     // 等一等加
     incrementWait = () =>{
-        setTimeout(()=>{
+        // setTimeout(()=>{
             const {value} = this.refs.selectedNumber
             // const {count} = this.state
             // this.setState({count:count + value*1})
-            store.dispatch(incrementAction(value*1))
-        },500)
+            this.props.store.dispatch(incrementWaitAction(value*1))
+        // },500)
     }
 
     render() {
         return (
             <div style={{marginLeft:'500px'}}>
-                <h1>{this.state.name}计算得结果为{store.getState()}</h1>
+                <h1>{this.state.name}计算得结果为{this.props.store.getState()}</h1>
                 <select ref="selectedNumber">
                     <option value="1">1</option>
                     <option value="2">2</option>
